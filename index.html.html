@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proud Mary — Modern Eatery + Wine Bar</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --sage: #b8c4b1;
+    --sage-dark: #8fa88a;
+    --navy: #1e2d3d;
+    --oxblood: #7a1f2e;
+    --teal: #2d6a6a;
+    --brass: #b8965a;
+    --charcoal: #2c2c2c;
+    --warm-white: #faf8f3;
+    --text-body: #3a3530;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--navy);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--navy);
+  }
+
+  .hero-gallery {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    opacity: 0.35;
+  }
+
+  .hero-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(20%);
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(30,45,61,0.4) 0%, rgba(30,45,61,0.7) 60%, rgba(30,45,61,0.95) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 24px;
+    animation: fadeUp 1.2s ease both;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--brass);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .hero-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 10vw, 100px);
+    font-weight: 700;
+    color: var(--warm-white);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(14px, 3vw, 20px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--sage);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--brass);
+    margin: 0 auto 40px;
+  }
+
+  .hero-info {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    flex-wrap: wrap;
+    color: var(--sage);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .hero-info span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero-info .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--brass);
+    display: inline-block;
+  }
+
+  /* SCROLL DOWN */
+  .scroll-cue {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--sage);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+
+  .scroll-cue::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--brass), transparent);
+  }
+
+  /* NAV */
+  .menu-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--navy);
+    border-bottom: 1px solid rgba(184,150,90,0.25);
+    padding: 0 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .menu-nav::-webkit-scrollbar { display: none; }
+
+  .menu-nav-inner {
+    display: flex;
+    gap: 0;
+    min-width: max-content;
+    margin: 0 auto;
+    max-width: 900px;
+  }
+
+  .nav-btn {
+    background: none;
+    border: none;
+    color: rgba(245,240,232,0.5);
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 18px 20px;
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+    transition: color 0.3s;
+  }
+
+  .nav-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--brass);
+    transition: width 0.3s;
+  }
+
+  .nav-btn.active,
+  .nav-btn:hover {
+    color: var(--cream);
+  }
+  .nav-btn.active::after,
+  .nav-btn:hover::after {
+    width: 80%;
+  }
+
+  /* SECTIONS */
+  .section {
+    display: none;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .section.active { display: block; }
+
+  /* SECTION HEADER */
+  .section-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .section-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--brass);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 6vw, 56px);
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.05;
+  }
+
+  .section-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--teal);
+    margin-top: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .section-rule {
+    width: 50px;
+    height: 1px;
+    background: var(--brass);
+    margin: 20px auto 0;
+  }
+
+  /* CATEGORY */
+  .cat-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy);
+    margin: 48px 0 6px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(30,45,61,0.12);
+    letter-spacing: 0.02em;
+  }
+
+  .cat-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--teal);
+    margin-bottom: 20px;
+  }
+
+  /* ITEM */
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(30,45,61,0.06);
+  }
+
+  .item:last-child { border-bottom: none; }
+
+  .item-left { flex: 1; min-width: 0; }
+
+  .item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--navy);
+    letter-spacing: 0.01em;
+    line-height: 1.3;
+  }
+
+  .item-desc {
+    font-size: 12.5px;
+    color: #7a7060;
+    margin-top: 3px;
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+    font-weight: 300;
+  }
+
+  .item-tags {
+    display: flex;
+    gap: 5px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  .tag-v { background: rgba(45,106,106,0.1); color: var(--teal); border: 1px solid rgba(45,106,106,0.2); }
+  .tag-vg { background: rgba(143,168,138,0.15); color: var(--sage-dark); border: 1px solid rgba(143,168,138,0.3); }
+  .tag-n { background: rgba(184,150,90,0.1); color: #8a6830; border: 1px solid rgba(184,150,90,0.25); }
+  .tag-s { background: rgba(122,31,46,0.08); color: var(--oxblood); border: 1px solid rgba(122,31,46,0.2); }
+
+  .item-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--navy);
+    white-space: nowrap;
+    min-width: 52px;
+    text-align: right;
+  }
+
+  .item-price .currency {
+    font-size: 11px;
+    vertical-align: super;
+    margin-right: 1px;
+    opacity: 0.7;
+  }
+
+  /* DRINK ITEM (two-col) */
+  .drink-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 32px;
+  }
+
+  @media (max-width: 600px) {
+    .drink-grid { grid-template-columns: 1fr; }
+  }
+
+  /* GALLERY */
+  .photo-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 40px 0 56px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .photo-strip img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .photo-strip img:hover { transform: scale(1.02); }
+
+  .photo-strip .wide {
+    grid-column: 1 / -1;
+    height: 260px;
+  }
+
+  /* ABOUT BLOCK */
+  .about-block {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 52px 40px;
+    border-radius: 2px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-block::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 200px;
+    color: rgba(184,150,90,0.08);
+    position: absolute;
+    top: -30px;
+    left: 16px;
+    line-height: 1;
+  }
+
+  .about-block p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(16px, 3vw, 20px);
+    font-weight: 300;
+    line-height: 1.75;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 14px;
+  }
+
+  .about-block p:last-child { margin-bottom: 0; }
+
+  /* HOURS TABLE */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  @media (max-width: 500px) { .info-grid { grid-template-columns: 1fr; } }
+
+  .info-card {
+    background: var(--warm-white);
+    border: 1px solid rgba(30,45,61,0.1);
+    padding: 28px 24px;
+    border-radius: 2px;
+  }
+
+  .info-card h4 {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 14px;
+  }
+
+  .info-card p, .info-card a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--navy);
+    text-decoration: none;
+  }
+
+  .info-card a:hover { color: var(--oxblood); }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    margin-top: 32px;
+    padding: 20px 24px;
+    background: rgba(30,45,61,0.04);
+    border-left: 3px solid var(--brass);
+    font-size: 12px;
+    color: #7a7060;
+  }
+
+  .legend span { display: flex; align-items: center; gap: 6px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    color: rgba(245,240,232,0.55);
+    text-align: center;
+    padding: 48px 24px 40px;
+  }
+
+  footer .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  footer .footer-sub {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 24px;
+  }
+
+  footer p { font-size: 13px; line-height: 1.8; }
+
+  footer a { color: var(--sage); text-decoration: none; }
+
+  .footer-line {
+    width: 40px;
+    height: 1px;
+    background: var(--brass);
+    margin: 20px auto;
+  }
+
+  /* ANIMATIONS */
+  /* FLOATING SOCIAL BAR */
+  .social-fab {
+    position: fixed;
+    right: 18px;
+    bottom: 24px;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .fab-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+  }
+
+  .fab-btn:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(0,0,0,0.35); }
+  .fab-btn svg { width: 22px; height: 22px; }
+  .fab-btn.whatsapp { background: #25D366; }
+  .fab-btn.instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+  .fab-btn.facebook { background: #1877F2; }
+  .fab-btn.book { background: var(--navy); }
+
+  .fab-label {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.6);
+    writing-mode: vertical-rl;
+    display: none;
+  }
+
+  /* BOOK A TABLE MODAL */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(20,30,45,0.75);
+    z-index: 300;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal-sheet {
+    background: var(--warm-white);
+    width: 100%;
+    max-width: 560px;
+    border-radius: 20px 20px 0 0;
+    padding: 32px 28px 40px;
+    animation: slideUp 0.35s cubic-bezier(0.32,0.72,0,1) both;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  }
+
+  .modal-handle {
+    width: 40px;
+    height: 4px;
+    background: rgba(30,45,61,0.15);
+    border-radius: 2px;
+    margin: 0 auto 24px;
+  }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .modal-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--teal);
+    margin-bottom: 28px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .form-row.single { grid-template-columns: 1fr; }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brass);
+    font-weight: 500;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    border: 1px solid rgba(30,45,61,0.15);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--navy);
+    background: white;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231e2d3d' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--brass);
+    box-shadow: 0 0 0 3px rgba(184,150,90,0.1);
+  }
+
+  .form-group textarea { resize: none; height: 80px; font-size: 14px; }
+
+  /* Seats visual picker */
+  .seats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .seat-btn {
+    border: 1px solid rgba(30,45,61,0.15);
+    border-radius: 8px;
+    padding: 10px 6px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--navy);
+    background: white;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .seat-btn:hover { border-color: var(--brass); color: var(--brass); }
+  .seat-btn.selected { background: var(--navy); color: var(--cream); border-color: var(--navy); }
+
+  /* Time slots */
+  .time-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .time-btn {
+    border: 1px solid rgba(30,45,61,0.15);
+    border-radius: 8px;
+    padding: 10px 4px;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: var(--navy);
+    background: white;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .time-btn:hover { border-color: var(--brass); color: var(--brass); }
+  .time-btn.selected { background: var(--navy); color: var(--cream); border-color: var(--navy); }
+  .time-btn.unavailable { opacity: 0.3; cursor: not-allowed; }
+
+  .form-section-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brass);
+    font-weight: 500;
+    margin-bottom: 6px;
+    margin-top: 18px;
+    display: block;
+  }
+
+  .book-submit {
+    width: 100%;
+    background: var(--navy);
+    color: var(--cream);
+    border: none;
+    border-radius: 10px;
+    padding: 16px;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 24px;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  .book-submit:hover { background: var(--oxblood); }
+  .book-submit:active { transform: scale(0.98); }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: rgba(30,45,61,0.4);
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .modal-sheet { position: relative; }
+
+  /* SUCCESS STATE */
+  .booking-success {
+    display: none;
+    text-align: center;
+    padding: 32px 0;
+  }
+
+  .booking-success.show { display: block; }
+  .booking-form-body.hide { display: none; }
+
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(45,106,106,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+
+  .success-icon svg { width: 32px; height: 32px; color: var(--teal); }
+
+  .success-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .success-msg {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #7a7060;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .success-detail {
+    background: rgba(30,45,61,0.04);
+    border-left: 3px solid var(--brass);
+    padding: 16px 20px;
+    text-align: left;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: var(--navy);
+    line-height: 1.8;
+    margin-bottom: 24px;
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* SOCIAL SECTION in footer */
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .social-link {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.2s, opacity 0.2s;
+    opacity: 0.85;
+  }
+
+  .social-link:hover { transform: scale(1.12); opacity: 1; }
+  .social-link svg { width: 20px; height: 20px; }
+  .social-link.ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+  .social-link.fb { background: #1877F2; }
+  .social-link.wa { background: #25D366; }
+  .social-link.tw { background: #000; }
+  .social-link.tk { background: #010101; border: 1px solid #333; }
+
+  /* BOOK button in nav */
+  .nav-book-btn {
+    background: var(--brass);
+    color: var(--navy) !important;
+    border-radius: 20px;
+    margin: auto 8px auto 12px !important;
+    padding: 8px 18px !important;
+    font-weight: 500 !important;
+  }
+
+  .nav-book-btn::after { display: none !important; }
+  .nav-book-btn:hover { background: #c8a668; color: var(--navy) !important; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* USER PHOTO GALLERY */
+  .user-gallery {
+    margin: 48px 0;
+  }
+
+  .user-gallery-title {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--brass);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .user-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .user-gallery-grid img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 2px;
+    transition: transform 0.4s;
+  }
+
+  .user-gallery-grid img:hover { transform: scale(1.02); }
+
+  /* PRICE RANGE */
+  .price-range-note {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: #7a7060;
+    text-align: right;
+    margin-bottom: 4px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 480px) {
+    .section { padding: 40px 16px 60px; }
+    .about-block { padding: 36px 24px; }
+    .photo-strip .wide { height: 180px; }
+    .photo-strip img { height: 150px; }
+    .item-price { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-gallery">
+    <img src="bar.jpeg" ...>
+<img src="interior1.jpeg" ...>
+
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Rosebank, Johannesburg · Est. 2021</p>
+    <h1 class="hero-logo">Proud Mary</h1>
+    <p class="hero-tagline">Modern Eatery + Wine Bar</p>
+    <div class="hero-divider"></div>
+    <div class="hero-info">
+      <span><span class="dot"></span>Open Daily 06:30 – 24:00</span>
+      <span><span class="dot"></span>The Bank, 26 Cradock Ave</span>
+      <span><span class="dot"></span>$$$ · 4.4 ★</span>
+    </div>
+  </div>
+  <div class="scroll-cue">Menu</div>
+</section>
+
+<!-- NAV -->
+<nav class="menu-nav">
+  <div class="menu-nav-inner">
+    <button class="nav-btn active" onclick="showSection('about',this)">About</button>
+    <button class="nav-btn" onclick="showSection('breakfast',this)">Breakfast</button>
+    <button class="nav-btn" onclick="showSection('lunch',this)">Lunch</button>
+    <button class="nav-btn" onclick="showSection('main',this)">Dinner</button>
+    <button class="nav-btn" onclick="showSection('dessert',this)">Dessert</button>
+    <button class="nav-btn" onclick="showSection('drinks',this)">Drinks</button>
+    <button class="nav-btn" onclick="showSection('gallery',this)">Gallery</button>
+    <button class="nav-btn nav-book-btn" onclick="openBooking()">Book a Table</button>
+  </div>
+</nav>
+
+<!-- ABOUT -->
+<section class="section active" id="about">
+  <div class="section-header">
+    <p class="section-eyebrow">Welcome</p>
+    <h2 class="section-title">Our Story</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="about-block">
+    <p>Welcome to Proud Mary, nestled in the heart of Rosebank's foodie district. A modern mid-century-inspired all-day eatery and wine bar to suit every taste.</p>
+    <p>Our home is in the New York-inspired building called "The Bank"  where oxblood, teal, and emerald tones meet plush fabrics, natural wood, terrazzo, and brass to hark back to New York's golden age.</p>
+    <p>Our extensive menu celebrates cuisines from around the world, offering a refined, casual, and modern approach to dining. For wine lovers, we champion small-batch, local, and independent wineries at superb price points.</p>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h4>Hours</h4>
+      <p>Open Daily<br>06h30 – 24h00</p>
+    </div>
+    <div class="info-card">
+      <h4>Location</h4>
+      <p>The Bank<br>26 Cradock Ave, Rosebank<br>Johannesburg, 2196</p>
+    </div>
+    <div class="info-card">
+      <h4>Reservations</h4>
+      <p><a href="tel:0100233316">010 023 3316</a><br>WhatsApp: <a href="tel:0615851596">061 585 1596</a><br><a href="mailto:reservations@proudmary.co.za">reservations@proudmary.co.za</a></p>
+    </div>
+    <div class="info-card">
+      <h4>Events</h4>
+      <p>Private dining &amp; bespoke events.<br>Contact <a href="mailto:lichelle@colada.co.za">Lichelle</a> for enquiries.</p>
+    </div>
+  </div>
+
+  <!-- User photos -->
+  <div class="user-gallery">
+    <p class="user-gallery-title">Inside Proud Mary</p>
+    <div class="user-gallery-grid" id="userGallery">
+      <!-- User photos inserted by JS if available, or placeholders -->
+    </div>
+  </div>
+</section>
+
+<!-- BREAKFAST -->
+<section class="section" id="breakfast">
+  <div class="section-header">
+    <p class="section-eyebrow">06:30 – 11:30</p>
+    <h2 class="section-title">Breakfast</h2>
+    <p class="section-sub">Brunch served until 14:00</p>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="cat-title">Caffè</div>
+  <div class="drink-grid">
+    <div>
+      <div class="item"><div class="item-left"><div class="item-name">Espresso</div></div><div class="item-price"><span class="currency">R</span>28</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Americano</div></div><div class="item-price"><span class="currency">R</span>34</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Cortado / Macchiato</div></div><div class="item-price"><span class="currency">R</span>34</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Flat White</div></div><div class="item-price"><span class="currency">R</span>38</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Cappuccino</div></div><div class="item-price"><span class="currency">R</span>38</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Caffe Latte</div></div><div class="item-price"><span class="currency">R</span>44</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Mocha / Hot Chocolate</div></div><div class="item-price"><span class="currency">R</span>48</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Hazelnut / Vanilla Latte</div></div><div class="item-price"><span class="currency">R</span>48</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Spiced Chai Latte</div></div><div class="item-price"><span class="currency">R</span>48</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Red Cappuccino</div></div><div class="item-price"><span class="currency">R</span>46</div></div>
+    </div>
+    <div>
+      <div class="item"><div class="item-left"><div class="item-name">Tea Pot</div><div class="item-desc">Breakfast · Earl Grey · Rooibos · Chamomile · Green · Mint · Raspberry · Peach</div></div><div class="item-price"><span class="currency">R</span>32</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Organic Loose Leaf Tea</div><div class="item-desc">Rooibos | Ceylon Black</div></div><div class="item-price"><span class="currency">R</span>38</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Milk Substitute</div><div class="item-desc">Soy · Oat · Almond · Macadamia · Coconut</div></div><div class="item-price"><span class="currency">R</span>12</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Smoothies</div><div class="item-desc">Spinach & Kale · Raspberry & Chai · Peanut Butter & Banana</div></div><div class="item-price"><span class="currency">R</span>75</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Juices — Pure / Green / Red / Golden</div></div><div class="item-price"><span class="currency">R</span>55–60</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Shakes</div><div class="item-desc">Vanilla · Double Choc · Oreo · Strawberry · Dulce De Leche</div></div><div class="item-price"><span class="currency">R</span>70</div></div>
+    </div>
+  </div>
+
+  <div class="cat-title">Sweet Breakfast</div>
+  <div class="item"><div class="item-left"><div class="item-name">French Toast</div><div class="item-desc">Mango curd, crunchy meringue, chocolate powder, vanilla ice cream, orange sherbert</div><div class="item-tags"><span class="tag tag-v">V</span></div></div><div class="item-price"><span class="currency">R</span>85</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Belgian Waffle</div><div class="item-desc">Chocolate torte, macerated strawberries, vanilla gelato, chocolate sauce</div><div class="item-tags"><span class="tag tag-v">V</span></div></div><div class="item-price"><span class="currency">R</span>95</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Buttermilk Hotcakes</div><div class="item-desc">Caramelized banana, crispy bacon, whipped ricotta, maple syrup, berry compote, butterscotch toasted walnuts</div></div><div class="item-price"><span class="currency">R</span>110</div></div>
+
+  <div class="cat-title">Fruits & Grains</div>
+  <div class="item"><div class="item-left"><div class="item-name">Fresh Fruit Bowl</div><div class="item-desc">Seasonal fresh fruit with honey & lime dressing</div><div class="item-tags"><span class="tag tag-v">V</span></div></div><div class="item-price"><span class="currency">R</span>80</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Granola Bowl</div><div class="item-desc">Lemon yoghurt, roasted maple granola, orange blossom water, fresh citrus, rhubarb jam</div><div class="item-tags"><span class="tag tag-v">V</span><span class="tag tag-n">N</span></div></div><div class="item-price"><span class="currency">R</span>90</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Tiramisu Oats</div><div class="item-desc">Tiramisu & peanut butter mousse, vanilla soaked oats, toasted cocoa nibs, espresso syrup</div><div class="item-tags"><span class="tag tag-v">V</span><span class="tag tag-n">N</span></div></div><div class="item-price"><span class="currency">R</span>80</div></div>
+
+  <div class="cat-title">On Toast</div>
+  <div class="cat-note">Choice of sourdough · health · 60% rye · gluten free (+R18)</div>
+  <div class="item"><div class="item-left"><div class="item-name">Smashed Avo</div><div class="item-desc">Chilli flakes, red onion, lemon, rocket</div><div class="item-tags"><span class="tag tag-vg">VG</span></div></div><div class="item-price"><span class="currency">R</span>95</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Pumpkin & Hummus</div><div class="item-desc">Honey roasted pumpkin, hummus, poached egg, sundried tomato, turmeric onions, goats cheese, pepitas</div><div class="item-tags"><span class="tag tag-v">V</span></div></div><div class="item-price"><span class="currency">R</span>90</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Creamy Mushrooms</div><div class="item-desc">Creamed field mushrooms, poached egg, sundried tomatoes, edamame, miso dust, fresh radish, chives</div><div class="item-tags"><span class="tag tag-v">V</span></div></div><div class="item-price"><span class="currency">R</span>105</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Salmon Deluxe</div><div class="item-desc">Smoked salmon trout, crème fraiche & chive scrambled eggs, fresh dill</div></div><div class="item-price"><span class="currency">R</span>155</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Bacon & Avo</div><div class="item-desc">Crispy bacon, avocado, jalapeño cream cheese, tomato gremolata</div></div><div class="item-price"><span class="currency">R</span>100</div></div>
+
+  <div class="cat-title">Eggs Your Way</div>
+  <div class="item"><div class="item-left"><div class="item-name">Café Omelette</div><div class="item-desc">Classic omelette with toast — add your favourite additions</div></div><div class="item-price"><span class="currency">R</span>65</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Scrambled · Poached · Fried</div><div class="item-desc">Two eggs with toast</div></div><div class="item-price"><span class="currency">R</span>55</div></div>
+
+  <div class="cat-title">Bagels & Croissants</div>
+  <div class="item"><div class="item-left"><div class="item-name">Salmon York Bagel</div><div class="item-desc">Salmon lox, dill, capers, black pepper, preserved lemon, watercress</div></div><div class="item-price"><span class="currency">R</span>155</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Bacon & Onion Bagel</div><div class="item-desc">Toasted bagel with caramelized onion & bacon cream cheese</div></div><div class="item-price"><span class="currency">R</span>80</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Bacon & Cheese Croissant</div><div class="item-desc">Bacon, cream cheese, scrambled eggs, rocket, pickled red onion & beetroot</div></div><div class="item-price"><span class="currency">R</span>95</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Salmon Lox Croissant</div><div class="item-desc">Salmon lox, poached eggs, sliced tomato, chive crème fraiche, sesame-poppy spice, dill</div><div class="item-tags"><span class="tag tag-s">S</span></div></div><div class="item-price"><span class="currency">R</span>155</div></div>
+
+  <div class="cat-title">Brunch Plates</div>
+  <div class="item"><div class="item-left"><div class="item-name">Mary's Bennys — Hickory Ham</div><div class="item-desc">English muffin, hollandaise, poached eggs, togarashi, chorizo crumble</div></div><div class="item-price"><span class="currency">R</span>110</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Mary's Bennys — Smoked Salmon</div><div class="item-desc">Sautéed spinach, dill, trout roe</div></div><div class="item-price"><span class="currency">R</span>155</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Bombay Frittata</div><div class="item-desc">Curried potato & tofu frittata, baby spinach, Cape Malay coconut sauce, crispy onions, gremolata</div><div class="item-tags"><span class="tag tag-vg">VG</span></div></div><div class="item-price"><span class="currency">R</span>105</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Labneh, Greens & Eggs</div><div class="item-desc">Poached eggs, grilled sweet potatoes, crunchy spinach & cauliflower, avo, labneh, lemon & pea shoots, lavash</div><div class="item-tags"><span class="tag tag-v">V</span></div></div><div class="item-price"><span class="currency">R</span>120</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Red Shakshuka</div><div class="item-desc">Za'atar baked eggs, harissa roasted tomatoes, red peppers, sweet potato, chilli feta crumble</div><div class="item-tags"><span class="tag tag-v">V</span></div></div><div class="item-price"><span class="currency">R</span>115</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Turkish Eggs</div><div class="item-desc">Poached eggs on lachha paratha, chilli chimichurri, lemon yoghurt, fresh dill, za'atar</div><div class="item-tags"><span class="tag tag-v">V</span></div></div><div class="item-price"><span class="currency">R</span>135</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Asian Omelette</div><div class="item-desc">Sugar-cured prawn & kimchi open omelette, feta, sprouts, coriander, spring onion, chilli oil</div></div><div class="item-price"><span class="currency">R</span>135</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Salmon & Crème Fraiche Waffles</div><div class="item-desc">Sourdough waffles, avo whip, cherry tomatoes, grilled halloumi, poached egg, smoked salmon</div></div><div class="item-price"><span class="currency">R</span>135</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Croque Madame</div><div class="item-desc">Grilled ham & cheese brioche french toast, fried egg, béchamel, Gruyère & Parmesan</div></div><div class="item-price"><span class="currency">R</span>135</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Proud English</div><div class="item-desc">Crispy bacon, pork sausage, grilled mushrooms, smokey beans, oven-roasted tomatoes, two eggs your way, toast</div></div><div class="item-price"><span class="currency">R</span>145</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Breakfast Burger</div><div class="item-desc">Beef patty 150g, tomato relish, cheddar, rocket, fried onions, bacon, aioli, fried egg, triple fried chips</div></div><div class="item-price"><span class="currency">R</span>145</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Steak, Egg & Bravas</div><div class="item-desc">Coal-grilled sirloin 200g, poached/fried egg, wagyu fat patatas bravas, confit tomato, aioli</div></div><div class="item-price"><span class="currency">R</span>165</div></div>
+
+  <div class="cat-title">Breakfast Cocktails</div>
+  <div class="item"><div class="item-left"><div class="item-name">Proud Bloody Mary</div></div><div class="item-price"><span class="currency">R</span>125</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Mimosa</div></div><div class="item-price"><span class="currency">R</span>105</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Valentina Non-Alc</div><div class="item-desc">Non-alc bubbly, cranberry & orange juice</div></div><div class="item-price"><span class="currency">R</span>95</div></div>
+
+  <div class="legend">
+    <span><span class="tag tag-v">V</span> Vegetarian</span>
+    <span><span class="tag tag-vg">VG</span> Vegan</span>
+    <span><span class="tag tag-n">N</span> Nuts</span>
+    <span><span class="tag tag-s">S</span> Sesame</span>
+    <span style="color:#7a7060">Please inform your waitron of any allergies.</span>
+  </div>
+</section>
+
+<!-- LUNCH -->
+<section class="section" id="lunch">
+  <div class="section-header">
+    <p class="section-eyebrow">Midday</p>
+    <h2 class="section-title">Lunch</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="cat-title">Lunch Plates</div>
+  <div class="item"><div class="item-left"><div class="item-name">Prawn Fish Cakes</div><div class="item-desc">Crispy prawn fish cakes, herb & trout roe cream, dill, spring onion & mint salad, poached egg, shaved radish</div></div><div class="item-price"><span class="currency">R</span>145</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Crispy Fish & Chips</div><div class="item-desc">Beer battered hake, potato wedges, lemon & celery remoulade, chives & lime</div></div><div class="item-price"><span class="currency">R</span>175</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Tuna Tataki Salad</div><div class="item-desc">Sesame crusted seared tuna, pineapple, spring onion, corn, cucumber & mint cabbage slaw, ponzu & sweet chilli</div></div><div class="item-price"><span class="currency">R</span>195</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Prawn Po' Boy Brioche</div><div class="item-desc">Crumbed fried prawns, yuzu mayo, watercress, pickled cucumbers on toasted brioche, garden salad</div></div><div class="item-price"><span class="currency">R</span>135</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Pepperonata Toasted Pannini</div><div class="item-desc">Grilled peppers, semi-dried tomatoes, roasted mushrooms, fior di latte mozzarella, smoked paprika mayo</div><div class="item-tags"><span class="tag tag-v">V</span></div></div><div class="item-price"><span class="currency">R</span>125</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Crispy Fried Chicken Katsu</div><div class="item-desc">Crispy fried chicken, caesar baby gem, pickled onion, tomato & basil pesto on toasted brioche</div></div><div class="item-price"><span class="currency">R</span>115</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Grilled Beef Sandwich</div><div class="item-desc">Caramelized onion, guindilla peppers, aged cheese, toasted pretzel bun, garlic aioli, house pickles</div></div><div class="item-price"><span class="currency">R</span>125</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Steak, Egg & Bravas</div><div class="item-desc">200g Grilled sirloin, confit tomato, wagyu fat patatas bravas, aioli, choice of egg</div></div><div class="item-price"><span class="currency">R</span>165</div></div>
+
+  <div class="legend">
+    <span><span class="tag tag-v">V</span> Vegetarian</span>
+    <span><span class="tag tag-vg">VG</span> Vegan</span>
+    <span style="color:#7a7060">Please inform your waitron of any allergies.</span>
+  </div>
+</section>
+
+<!-- MAIN / DINNER -->
+<section class="section" id="main">
+  <div class="section-header">
+    <p class="section-eyebrow">Evening</p>
+    <h2 class="section-title">Dinner</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="cat-title">Aperitif Cocktails</div>
+  <div class="item"><div class="item-left"><div class="item-name">Proud Mary</div><div class="item-desc">Gin, strawberry infused Chenin Blanc, lemon juice, sugar syrup, peach bitters</div></div><div class="item-price"><span class="currency">R</span>155</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">The Bank Martini</div><div class="item-desc">Ketel One Vodka or Tanqueray London Dry Gin, vermouth — Perfect · Dirty · Extra Dry</div></div><div class="item-price"><span class="currency">R</span>135</div></div>
+
+  <div class="cat-title">Oysters</div>
+  <div class="item"><div class="item-left"><div class="item-name">Thai Nam Jim</div><div class="item-desc">Two / Dozen</div></div><div class="item-price"><span class="currency">R</span>110 / 520</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Mignonette</div><div class="item-desc">Two / Dozen</div></div><div class="item-price"><span class="currency">R</span>95 / 470</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Naked</div><div class="item-desc">Two / Dozen</div></div><div class="item-price"><span class="currency">R</span>90 / 420</div></div>
+
+  <div class="cat-title">Salads</div>
+  <div class="item"><div class="item-left"><div class="item-name">Smoked Carrot & Labneh</div><div class="item-desc">Coal-fired carrots, herb feta, roasted chickpeas, red onion, pumpkin seeds, lemon olive oil</div><div class="item-tags"><span class="tag tag-v">V</span></div></div><div class="item-price"><span class="currency">R</span>145</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Mezé</div><div class="item-desc">Marinated tomatoes, herb feta, sugar cured cucumber, Gordal olives, pickled red onion</div><div class="item-tags"><span class="tag tag-v">V</span></div></div><div class="item-price"><span class="currency">R</span>115</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Butternut & Orange</div><div class="item-desc">Red quinoa, pickled butternut, shaved fennel, orange segments, smoked grapes, wholegrain mustard dressing</div><div class="item-tags"><span class="tag tag-vg">VG</span></div></div><div class="item-price"><span class="currency">R</span>120</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Burrata & Beets</div><div class="item-desc">Roasted heirloom beetroot, buratta, grapefruit, baby leaves, pumpkin seeds, walnuts, citrus dressing</div><div class="item-tags"><span class="tag tag-v">V</span><span class="tag tag-n">N</span></div></div><div class="item-price"><span class="currency">R</span>215</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Baby Gem Caesar</div><div class="item-desc">White anchovies, crispy bacon, boiled eggs, pecorino, pangrattato, anchovy caesar dressing</div></div><div class="item-price"><span class="currency">R</span>135</div></div>
+
+  <div class="cat-title">Small Plates</div>
+  <div class="item"><div class="item-left"><div class="item-name">Chickpea Falafels</div><div class="item-desc">Beetroot hummus, lemon tahini, grapefruit, jalapeño & sumac onions</div><div class="item-tags"><span class="tag tag-vg">VG</span><span class="tag tag-s">S</span></div></div><div class="item-price"><span class="currency">R</span>95</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Aubergine Milanese</div><div class="item-desc">Panko crumbed aubergine, olive & chilli chutney, whipped feta, guindilla peppers</div><div class="item-tags"><span class="tag tag-v">V</span></div></div><div class="item-price"><span class="currency">R</span>95</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Miso Mushroom Skewer</div><div class="item-desc">Labneh, za'atar, ponzu, coriander seeds</div><div class="item-tags"><span class="tag tag-v">V</span></div></div><div class="item-price"><span class="currency">R</span>105</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Coal-fired Broccolini</div><div class="item-desc">Smacked dates, almond cream, chilli oil, garlic & ginger crisps</div><div class="item-tags"><span class="tag tag-vg">VG</span><span class="tag tag-n">N</span></div></div><div class="item-price"><span class="currency">R</span>75</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Smoked Cauliflower</div><div class="item-desc">Smoked red pepper & walnut sauce, saltana jam, pistou, crispy garlic, fried shallots</div><div class="item-tags"><span class="tag tag-vg">VG</span><span class="tag tag-n">N</span></div></div><div class="item-price"><span class="currency">R</span>75</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Seabass Tiradito</div><div class="item-desc">Rose-harissa, coconut cream, candied ginger, preserved tomato</div></div><div class="item-price"><span class="currency">R</span>145</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Salmon Sashimi</div><div class="item-desc">Shiso & jalapeño slaw, pink peppercorn ponzu</div></div><div class="item-price"><span class="currency">R</span>195</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Crispy Fried Squid</div><div class="item-desc">Lemon aioli, turmeric onions, coconut flakes, preserved lemon, coriander, basil</div></div><div class="item-price"><span class="currency">R</span>145</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Mussel Pot</div><div class="item-desc">Ale & leek-butter steamed mussels, pistou, Turkish bread</div></div><div class="item-price"><span class="currency">R</span>95</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Paprika Lemon Prawns</div><div class="item-desc">Grilled prawns, garlic & parsley lemon butter, sundried tomato</div></div><div class="item-price"><span class="currency">R</span>195</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Wagyu Beef Koftas</div><div class="item-desc">Romesco sauce, sumac onions, chilli oil</div></div><div class="item-price"><span class="currency">R</span>120</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Pork Belly Chicharrones</div><div class="item-desc">Crispy pork belly bites, chilli, soy & lime, crackling, pickled cucumber</div></div><div class="item-price"><span class="currency">R</span>135</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Beef Tataki</div><div class="item-desc">Seared fillet, sugar cured cucumber, crispy cabbage, confit garlic aioli, curry leaves, dill</div></div><div class="item-price"><span class="currency">R</span>165</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Chicken Kabobs</div><div class="item-desc">Fired chicken thigh skewers, smoked grapes, saffron aioli, crispy chicken skin, lime yoghurt</div></div><div class="item-price"><span class="currency">R</span>125</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Oxtail Croquettes</div><div class="item-desc">Crispy fried oxtail bites, garlic mayo, parmesan wafers, parsley dust</div></div><div class="item-price"><span class="currency">R</span>130</div></div>
+
+  <div class="cat-title">Grilled Seafood</div>
+  <div class="item"><div class="item-left"><div class="item-name">Caper Butter Sole</div><div class="item-desc">Caper lemon butter, shaved fennel, coriander, chives — choice of side</div></div><div class="item-price"><span class="currency">R</span>295</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Salmon Niçoise</div><div class="item-desc">Black olives, green beans, artichokes, sundried tomatoes in white wine & burnt butter, dill crème</div></div><div class="item-price"><span class="currency">R</span>365</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Saffron Seabass</div><div class="item-desc">Grilled seabass in saffron butter, pan fried harissa squid & mussels, smoked balsamic red peppers, rice pilaf</div></div><div class="item-price"><span class="currency">R</span>375</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Yuzu Lemon Prawns</div><div class="item-desc">8 Queen prawns, yuzu lemon butter, sticky sesame vegetable rice, apple & watercress salad</div></div><div class="item-price"><span class="currency">R</span>565</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Oven-Roasted Whole Fish</div><div class="item-desc">Daily selection. Orange pickled fennel salad. Allow 35 min.</div></div><div class="item-price">SQ</div></div>
+
+  <div class="cat-title">Speciality Cuts</div>
+  <div class="item"><div class="item-left"><div class="item-name">Rib Eye Frites</div><div class="item-desc">350g Coal-fired mature rib eye, béarnaise sauce, beef fat parmesan chips</div></div><div class="item-price"><span class="currency">R</span>365</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Beef Fillet Au Poivre</div><div class="item-desc">300g Beef fillet, peppercorn & mustard cream, confit onions, crispy potato pavé</div></div><div class="item-price"><span class="currency">R</span>365</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Côte de Boeuf</div><div class="item-desc">650g Bone-in Rib Eye. Wagyu fat potato wedges & peppercorn cream sauce</div></div><div class="item-price"><span class="currency">R</span>495</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Rump Picanha</div><div class="item-desc">21 Day matured 350g Black Angus rump, trinchado sauce, crispy potato wedges, red pepper chimichurri</div></div><div class="item-price"><span class="currency">R</span>345</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Wagyu Steak</div><div class="item-desc">Premium local Wagyu. Chimichurri roasted bone marrow</div></div><div class="item-price">SQ</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Tomahawk</div><div class="item-desc">32 Day dry-aged 1.2kg, Café de Paris butter, parmesan fries, peppercorn cream. Allow 45 min.</div></div><div class="item-price"><span class="currency">R</span>745</div></div>
+
+  <div class="cat-title">Café Plates</div>
+  <div class="item"><div class="item-left"><div class="item-name">Lemon & Pea Risotto</div><div class="item-desc">Pea & spinach risotto, lemon ricotta, pink peppercorns, pickled celery, Gruyère</div><div class="item-tags"><span class="tag tag-v">V</span></div></div><div class="item-price"><span class="currency">R</span>155</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Cauliflower Gyoza</div><div class="item-desc">Curried cauliflower & potato dumplings, coconut & lemongrass broth, pickled cauliflower, coriander</div><div class="item-tags"><span class="tag tag-vg">VG</span></div></div><div class="item-price"><span class="currency">R</span>165</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Pan-fried Linefish</div><div class="item-desc">Fresh linefish, sauce vierge, sautéed zucchini, squash, oyster mushrooms & broccolini</div></div><div class="item-price"><span class="currency">R</span>295</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Moroccan Chicken</div><div class="item-desc">Braised chicken thighs, pistachio, olives, raisins, bulgar pilaf, preserved lemon, za'atar laffa</div><div class="item-tags"><span class="tag tag-n">N</span></div></div><div class="item-price"><span class="currency">R</span>195</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Pele Pele Chicken</div><div class="item-desc">Half deboned chicken, spicy pele pele sauce, marinated red onion & corn salsa, coriander, roast potatoes</div></div><div class="item-price"><span class="currency">R</span>295</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Seafood Linguine</div><div class="item-desc">Prawns, mussels & linefish in white wine, garlic, chilli, olive oil, red onion, fresh herbs</div></div><div class="item-price"><span class="currency">R</span>355</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Cheese Burger</div><div class="item-desc">200g Aged beef patty, creamy cheddar, burger mayo, pickles, tomato & lettuce, pretzel bun, parmesan & truffle fries</div></div><div class="item-price"><span class="currency">R</span>195</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Chimichurri Lamb Chops</div><div class="item-desc">Marinated grilled lamb chops, chilli feta & chimichurri, roast potatoes, parsley butter</div></div><div class="item-price"><span class="currency">R</span>375</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Porchetta</div><div class="item-desc">Oven roasted pork belly stuffed with black forest ham, pangratata, spinach, sultanas & ginger. Summer bean salad</div></div><div class="item-price"><span class="currency">R</span>245</div></div>
+
+  <div class="cat-title">Dips & Breads</div>
+  <div class="item"><div class="item-left"><div class="item-name">Hummus — burnt butter</div></div><div class="item-price"><span class="currency">R</span>60</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Whipped Feta — lemon, kataifi</div></div><div class="item-price"><span class="currency">R</span>60</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Muhammara — red pepper, walnuts</div></div><div class="item-price"><span class="currency">R</span>65</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Fired Laffa & Lavash</div></div><div class="item-price"><span class="currency">R</span>25</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Bread & Butter</div><div class="item-desc">Soft milk bun, miso butter, black pepper & honey</div></div><div class="item-price"><span class="currency">R</span>45</div></div>
+
+  <div class="legend">
+    <span><span class="tag tag-v">V</span> Vegetarian</span>
+    <span><span class="tag tag-vg">VG</span> Vegan</span>
+    <span><span class="tag tag-n">N</span> Nuts</span>
+    <span><span class="tag tag-s">S</span> Sesame</span>
+    <span style="color:#7a7060">Please inform your waitron of any allergies.</span>
+  </div>
+</section>
+
+<!-- DESSERT -->
+<section class="section" id="dessert">
+  <div class="section-header">
+    <p class="section-eyebrow">Sweet Endings</p>
+    <h2 class="section-title">Dessert</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="cat-title">Desserts</div>
+  <div class="item"><div class="item-left"><div class="item-name">Strawberry Mess</div><div class="item-desc">Poached strawberries, gin jellies, blanc mange, coconut sorbet, torched lime meringues</div></div><div class="item-price"><span class="currency">R</span>105</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Citrus Choux Bun</div><div class="item-desc">Choux bun au craquelin filled with citrus cream patisserie & orange reduction sauce</div></div><div class="item-price"><span class="currency">R</span>95</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Chocolate Caramel Fondant</div><div class="item-desc">Dark chocolate fondant, caramel, chocolate soil, caramel popcorn, salted caramel gelato</div></div><div class="item-price"><span class="currency">R</span>115</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Peaches & Cream Panna Cotta</div><div class="item-desc">Yoghurt panna cotta, mango jelly, passion fruit pearls, crumble, peach salsa, chantilly, vanilla bean gelato</div></div><div class="item-price"><span class="currency">R</span>95</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Coconut Brûlée Cheesecake</div><div class="item-desc">Vanilla cheesecake, white chocolate & coconut ganache, coconut gelato</div></div><div class="item-price"><span class="currency">R</span>105</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Bon Bons</div><div class="item-desc">Variety of 6 Mary's chocolate bon bons</div></div><div class="item-price"><span class="currency">R</span>65</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Tropical Sorbet — 3 Scoops</div><div class="item-desc">Mango · Lemon · Passionfruit</div></div><div class="item-price"><span class="currency">R</span>80</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Gelato — 3 Scoops</div><div class="item-desc">Turkish Delight · Ferrero Rocher · Vegan Cinnamon Cookie Dough</div><div class="item-tags"><span class="tag tag-n">N</span></div></div><div class="item-price"><span class="currency">R</span>90</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Cheese Plate</div><div class="item-desc">Local cheeses, pear compote, Gordal olives, Turkish toast & lavash crackers</div><div class="item-tags"><span class="tag tag-n">N</span></div></div><div class="item-price"><span class="currency">R</span>160</div></div>
+
+  <div class="cat-title">Dessert Wines</div>
+  <div class="cat-note">50ml glass</div>
+  <div class="item"><div class="item-left"><div class="item-name">Joostenberg Late Harvest</div><div class="item-desc">2021 Chenin · Paarl</div></div><div class="item-price"><span class="currency">R</span>70</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Thelema</div><div class="item-desc">2021 Muscat · Stellenbosch</div></div><div class="item-price"><span class="currency">R</span>75</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Beaumont Cape Vintage</div><div class="item-desc">2018 Tinta & Pinotage · Walker Bay</div></div><div class="item-price"><span class="currency">R</span>80</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Edelkeur Noble Late Harvest</div><div class="item-desc">2013 Chenin Blanc · W-Cape</div></div><div class="item-price"><span class="currency">R</span>120</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Vin De Constance</div><div class="item-desc">2019 Muscat · Constantia</div></div><div class="item-price"><span class="currency">R</span>285</div></div>
+
+  <div class="cat-title">Digestifs & Dessert Cocktails</div>
+  <div class="item"><div class="item-left"><div class="item-name">Brandy Alexander</div><div class="item-desc">Van Ryn's 10Yr, crème de cacao, cream, nutmeg</div></div><div class="item-price"><span class="currency">R</span>145</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Boulevardier</div><div class="item-desc">Buffalo Trace Bourbon, Campari, sweet vermouth</div></div><div class="item-price"><span class="currency">R</span>135</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Highlands Martini</div><div class="item-desc">Glenmorangie 12Yr, espresso, date syrup, Amaro Averna</div></div><div class="item-price"><span class="currency">R</span>160</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Nonino Grappa</div></div><div class="item-price"><span class="currency">R</span>145</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Wilderer Grappa — Muscato</div></div><div class="item-price"><span class="currency">R</span>70</div></div>
+</section>
+
+<!-- DRINKS -->
+<section class="section" id="drinks">
+  <div class="section-header">
+    <p class="section-eyebrow">Cocktail & Wine Bar</p>
+    <h2 class="section-title">Drinks</h2>
+    <p class="section-sub">April 2026</p>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="cat-title">Summer Cocktail Club</div>
+  <div class="item"><div class="item-left"><div class="item-name">Basil Grande</div><div class="item-desc">Amarula gin, fresh strawberries, strawberry syrup, fresh basil, lemon</div></div><div class="item-price"><span class="currency">R</span>145</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Paper Plane</div><div class="item-desc">Woodford Reserve, Amaro Nonino, Aperol, citrus juice</div></div><div class="item-price"><span class="currency">R</span>150</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Mad-hattan</div><div class="item-desc">Monkey Shoulder Whisky, pepper & strawberry rosso, peach bitters, orange bitters</div></div><div class="item-price"><span class="currency">R</span>150</div></div>
+
+  <div class="cat-title">Modern Classic Cocktails</div>
+  <div class="item"><div class="item-left"><div class="item-name">Proud Mary</div><div class="item-desc">Tanqueray Gin, strawberry infused Chenin Blanc, lemon, peach bitters</div></div><div class="item-price"><span class="currency">R</span>155</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">The Bank Martini</div><div class="item-desc">Ketel One Vodka or Tanqueray Gin, vermouth — Perfect · Dirty · Extra Dry</div></div><div class="item-price"><span class="currency">R</span>135</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Espresso Martini</div><div class="item-desc">Ketel One Vodka, Kahlúa, espresso</div></div><div class="item-price"><span class="currency">R</span>125</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Margarita</div><div class="item-desc">1800 Blanco Tequila, Cointreau, lime, sugar, chilli salt</div></div><div class="item-price"><span class="currency">R</span>155</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Cosmopolitan</div><div class="item-desc">Citrus infused Cruz Vodka, Cointreau, cranberry</div></div><div class="item-price"><span class="currency">R</span>135</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Moscow Mule</div><div class="item-desc">Belvedere Vodka, ginger beer, bitters, fresh lime, mint</div></div><div class="item-price"><span class="currency">R</span>130</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Negroni</div><div class="item-desc">Hendrick's Gin, Campari, sweet vermouth</div></div><div class="item-price"><span class="currency">R</span>130</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Old Fashioned</div><div class="item-desc">Buffalo Trace Bourbon, maple syrup, aromatic bitters</div></div><div class="item-price"><span class="currency">R</span>140</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Rooibos French 75</div><div class="item-desc">Rooibos infused Botanist Gin, lemon, Buchu syrup, Cap Classique bubbly</div></div><div class="item-price"><span class="currency">R</span>145</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Mary's Mojito</div><div class="item-desc">Bacardi Carta Blanca, lime, agave, berries, soda, rosemary</div></div><div class="item-price"><span class="currency">R</span>140</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Bellini</div><div class="item-desc">Masottina prosecco, passionfruit & peach extract</div></div><div class="item-price"><span class="currency">R</span>135</div></div>
+
+  <div class="cat-title">Spirit-Free Cocktails</div>
+  <div class="item"><div class="item-left"><div class="item-name">Disco Spritz</div><div class="item-desc">Abstinence Blood Orange, Allure Non-Alc bubbly, elderflower, soda</div></div><div class="item-price"><span class="currency">R</span>95</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Basil Chico</div><div class="item-desc">Fresh strawberries, vanilla syrup, lemon, fresh basil, tonic</div></div><div class="item-price"><span class="currency">R</span>85</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Abstinence Paloma</div><div class="item-desc">Abstinence Blood Orange, lemon, simple syrup, grapefruit, lemonade</div></div><div class="item-price"><span class="currency">R</span>85</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Valentina</div><div class="item-desc">Non-alc bubbly, cranberry & orange juice</div></div><div class="item-price"><span class="currency">R</span>85</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Waterberry</div><div class="item-desc">Watermelon, water, berries, black tea</div></div><div class="item-price"><span class="currency">R</span>85</div></div>
+  <div class="item"><div class="item-left"><div class="item-name">Infused Rooibos Tea Coolers</div><div class="item-desc">Mango · Lemon · Peach · Mixed Berry · Pomegranate — over crushed ice with lemonade & soda</div></div><div class="item-price"><span class="currency">R</span>60</div></div>
+
+  <div class="cat-title">Draft Beer</div>
+  <div class="cat-note">330ml / 500ml</div>
+  <div class="drink-grid">
+    <div>
+      <div class="item"><div class="item-left"><div class="item-name">Jack Black Brewers Lager</div></div><div class="item-price"><span class="currency">R</span>50/65</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Heineken</div></div><div class="item-price"><span class="currency">R</span>45/60</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Proud Pilsner</div></div><div class="item-price"><span class="currency">R</span>55/70</div></div>
+    </div>
+    <div>
+      <div class="item"><div class="item-left"><div class="item-name">Palm Amber Ale</div></div><div class="item-price"><span class="currency">R</span>65/80</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">La Trappe Blond</div></div><div class="item-price"><span class="currency">R</span>80/105</div></div>
+    </div>
+  </div>
+
+  <div class="cat-title">Spirits — Gin</div>
+  <div class="drink-grid">
+    <div>
+      <div class="item"><div class="item-left"><div class="item-name">Amarula Premium African Gin</div></div><div class="item-price"><span class="currency">R</span>35</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Hendrick's</div></div><div class="item-price"><span class="currency">R</span>60</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Tanqueray No. 10</div></div><div class="item-price"><span class="currency">R</span>60</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Bombay Sapphire</div></div><div class="item-price"><span class="currency">R</span>50</div></div>
+    </div>
+    <div>
+      <div class="item"><div class="item-left"><div class="item-name">Botanist</div></div><div class="item-price"><span class="currency">R</span>85</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Ki No Bi Kyoto</div></div><div class="item-price"><span class="currency">R</span>100</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Six Dogs Karoo / Blue</div></div><div class="item-price"><span class="currency">R</span>60</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Inverroche Amber</div></div><div class="item-price"><span class="currency">R</span>55</div></div>
+    </div>
+  </div>
+
+  <div class="cat-title">Tequila & Mezcal</div>
+  <div class="drink-grid">
+    <div>
+      <div class="item"><div class="item-left"><div class="item-name">1800 Blanco</div></div><div class="item-price"><span class="currency">R</span>80</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Don Julio Reposado</div></div><div class="item-price"><span class="currency">R</span>125</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Don Julio 1942</div></div><div class="item-price"><span class="currency">R</span>825</div></div>
+    </div>
+    <div>
+      <div class="item"><div class="item-left"><div class="item-name">Jose Cuervo Reserva De La Familia</div></div><div class="item-price"><span class="currency">R</span>300</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Montelobos Mezcal</div></div><div class="item-price"><span class="currency">R</span>85</div></div>
+    </div>
+  </div>
+
+  <div class="cat-title">Vodka</div>
+  <div class="drink-grid">
+    <div>
+      <div class="item"><div class="item-left"><div class="item-name">Belvedere</div></div><div class="item-price"><span class="currency">R</span>65</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Grey Goose</div></div><div class="item-price"><span class="currency">R</span>65</div></div>
+    </div>
+    <div>
+      <div class="item"><div class="item-left"><div class="item-name">Ketel One</div></div><div class="item-price"><span class="currency">R</span>60</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Cruz Vintage Black</div></div><div class="item-price"><span class="currency">R</span>40</div></div>
+    </div>
+  </div>
+
+  <div class="cat-title">Whisky · Whiskey · Bourbon</div>
+  <div class="drink-grid">
+    <div>
+      <div class="item"><div class="item-left"><div class="item-name">Bain's — South African</div></div><div class="item-price"><span class="currency">R</span>45</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Three Ships 11YR</div></div><div class="item-price"><span class="currency">R</span>95</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Suntory Toki — Japanese</div></div><div class="item-price"><span class="currency">R</span>70</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Hibiki Harmony</div></div><div class="item-price"><span class="currency">R</span>205</div></div>
+    </div>
+    <div>
+      <div class="item"><div class="item-left"><div class="item-name">Chivas Regal 12YR</div></div><div class="item-price"><span class="currency">R</span>60</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Glenfiddich 12YR</div></div><div class="item-price"><span class="currency">R</span>85</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Glenfiddich 18YR</div></div><div class="item-price"><span class="currency">R</span>220</div></div>
+      <div class="item"><div class="item-left"><div class="item-name">Glenfiddich 30YR</div></div><div class="item-price"><span class="currency">R</span>2200</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section" id="gallery">
+  <div class="section-header">
+    <p class="section-eyebrow">A Glimpse Inside</p>
+    <h2 class="section-title">Gallery</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div id="galleryMain" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;border-radius:4px;overflow:hidden;">
+    <!-- Populated by JS -->
+  </div>
+</section>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="bookingModal" onclick="handleOverlayClick(event)">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <button class="modal-close" onclick="closeBooking()">✕</button>
+
+    <!-- FORM -->
+    <div class="booking-form-body" id="bookingFormBody">
+      <h2 class="modal-title">Book a Table</h2>
+      <p class="modal-sub">Reserve your experience at Proud Mary</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" id="bkFirstName" placeholder="Jane" />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" id="bkLastName" placeholder="Smith" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="bkEmail" placeholder="jane@email.com" />
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" id="bkPhone" placeholder="+27 82 000 0000" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="bkDate" />
+        </div>
+        <div class="form-group">
+          <label>Occasion</label>
+          <select id="bkOccasion">
+            <option value="">Select (optional)</option>
+            <option>Birthday</option>
+            <option>Anniversary</option>
+            <option>Business Lunch</option>
+            <option>Date Night</option>
+            <option>Celebration</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <span class="form-section-label">Select a Time</span>
+      <div class="time-grid" id="timeGrid">
+        <button class="time-btn" onclick="selectTime(this)">06:30</button>
+        <button class="time-btn" onclick="selectTime(this)">07:00</button>
+        <button class="time-btn" onclick="selectTime(this)">07:30</button>
+        <button class="time-btn" onclick="selectTime(this)">08:00</button>
+        <button class="time-btn" onclick="selectTime(this)">08:30</button>
+        <button class="time-btn" onclick="selectTime(this)">09:00</button>
+        <button class="time-btn" onclick="selectTime(this)">10:00</button>
+        <button class="time-btn" onclick="selectTime(this)">11:00</button>
+        <button class="time-btn" onclick="selectTime(this)">12:00</button>
+        <button class="time-btn" onclick="selectTime(this)">13:00</button>
+        <button class="time-btn" onclick="selectTime(this)">14:00</button>
+        <button class="time-btn" onclick="selectTime(this)">15:00</button>
+        <button class="time-btn" onclick="selectTime(this)">17:00</button>
+        <button class="time-btn" onclick="selectTime(this)">18:00</button>
+        <button class="time-btn" onclick="selectTime(this)">19:00</button>
+        <button class="time-btn" onclick="selectTime(this)">20:00</button>
+        <button class="time-btn" onclick="selectTime(this)">21:00</button>
+        <button class="time-btn" onclick="selectTime(this)">22:00</button>
+        <button class="time-btn" onclick="selectTime(this)">23:00</button>
+        <button class="time-btn unavailable" disabled>23:30</button>
+      </div>
+
+      <span class="form-section-label">Number of Seats</span>
+      <div class="seats-grid" id="seatsGrid">
+        <button class="seat-btn" onclick="selectSeat(this)">1</button>
+        <button class="seat-btn" onclick="selectSeat(this)">2</button>
+        <button class="seat-btn" onclick="selectSeat(this)">3</button>
+        <button class="seat-btn" onclick="selectSeat(this)">4</button>
+        <button class="seat-btn" onclick="selectSeat(this)">5</button>
+        <button class="seat-btn" onclick="selectSeat(this)">6</button>
+        <button class="seat-btn" onclick="selectSeat(this)">7</button>
+        <button class="seat-btn" onclick="selectSeat(this)">8</button>
+        <button class="seat-btn" onclick="selectSeat(this)">9</button>
+        <button class="seat-btn" onclick="selectSeat(this)">10+</button>
+      </div>
+
+      <div class="form-row single" style="margin-top:18px;">
+        <div class="form-group">
+          <label>Special Requests</label>
+          <textarea id="bkNotes" placeholder="Dietary requirements, high chair needed, wheelchair access…"></textarea>
+        </div>
+      </div>
+
+      <button class="book-submit" onclick="submitBooking()">Confirm Reservation</button>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="booking-success" id="bookingSuccess">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3 class="success-title">You're all set!</h3>
+      <p class="success-msg">Your reservation request has been submitted. We'll confirm via WhatsApp or email shortly.</p>
+      <div class="success-detail" id="successDetail"></div>
+      <button class="book-submit" onclick="closeBooking()" style="margin-top:0">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING SOCIAL BUTTONS -->
+<div class="social-fab">
+  <a class="fab-btn whatsapp" href="https://wa.me/27615851596" target="_blank" title="WhatsApp Reservations">
+    <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+  <a class="fab-btn instagram" href="https://instagram.com/proudmary_sa" target="_blank" title="Instagram">
+    <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+  </a>
+  <a class="fab-btn facebook" href="https://facebook.com/ProudMarySA" target="_blank" title="Facebook">
+    <svg viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+  </a>
+</div>
+
+<footer>
+  <p class="footer-logo">Proud Mary</p>
+  <p class="footer-sub">Modern Eatery + Wine Bar</p>
+  <p>The Bank, 26 Cradock Ave, Rosebank, Johannesburg, 2196</p>
+  <p>Open Daily · 06h30 – 24h00</p>
+  <div class="footer-line"></div>
+  <p>
+    <a href="tel:0100233316">010 023 3316</a> &nbsp;·&nbsp;
+    <a href="mailto:reservations@proudmary.co.za">reservations@proudmary.co.za</a><br>
+    <a href="https://proudmary.co.za" target="_blank">proudmary.co.za</a>
+  </p>
+  <div class="footer-line"></div>
+
+  <!-- SOCIAL LINKS -->
+  <p style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--brass);margin-bottom:14px;">Follow Us</p>
+  <div class="social-links">
+    <a class="social-link wa" href="https://wa.me/27615851596" target="_blank" title="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    <a class="social-link ig" href="https://instagram.com/proudmary_sa" target="_blank" title="Instagram @proudmary_sa">
+      <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+    <a class="social-link fb" href="https://facebook.com/ProudMarySA" target="_blank" title="Facebook @ProudMarySA">
+      <svg viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+    <a class="social-link tw" href="https://twitter.com/ProudMarySA" target="_blank" title="Twitter">
+      <svg viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a class="social-link tk" href="https://tiktok.com/@proudmary_sa" target="_blank" title="TikTok">
+      <svg viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.28 8.28 0 004.84 1.54V6.83a4.85 4.85 0 01-1.07-.14z"/></svg>
+    </a>
+  </div>
+
+  <div class="footer-line"></div>
+  <p style="font-size:11px;opacity:0.35;margin-bottom:8px">@proudmary_sa &nbsp;·&nbsp; @ProudMarySA</p>
+  <p style="font-size:10px;opacity:0.25">© 2024 Proud Mary. The Bank, Rosebank.</p>
+</footer>
+
+<script>
+  // ── Navigation ──────────────────────────────────────────────
+  function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn:not(.nav-book-btn)').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    if (btn && !btn.classList.contains('nav-book-btn')) btn.classList.add('active');
+    window.scrollTo({ top: document.querySelector('.menu-nav').offsetTop - 1, behavior: 'smooth' });
+  }
+
+  // ── Booking Modal ────────────────────────────────────────────
+  let selectedTime = '';
+  let selectedSeats = '';
+
+  function openBooking() {
+    document.getElementById('bookingModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // Set min date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('bkDate').min = today;
+    document.getElementById('bkDate').value = today;
+    // Reset success
+    document.getElementById('bookingSuccess').classList.remove('show');
+    document.getElementById('bookingFormBody').classList.remove('hide');
+    selectedTime = '';
+    selectedSeats = '';
+    document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('selected'));
+    document.querySelectorAll('.seat-btn').forEach(b => b.classList.remove('selected'));
+  }
+
+  function closeBooking() {
+    document.getElementById('bookingModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('bookingModal')) closeBooking();
+  }
+
+  function selectTime(btn) {
+    document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedTime = btn.textContent;
+  }
+
+  function selectSeat(btn) {
+    document.querySelectorAll('.seat-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedSeats = btn.textContent;
+  }
+
+  function submitBooking() {
+    const firstName = document.getElementById('bkFirstName').value.trim();
+    const lastName  = document.getElementById('bkLastName').value.trim();
+    const email     = document.getElementById('bkEmail').value.trim();
+    const phone     = document.getElementById('bkPhone').value.trim();
+    const date      = document.getElementById('bkDate').value;
+    const occasion  = document.getElementById('bkOccasion').value;
+    const notes     = document.getElementById('bkNotes').value.trim();
+
+    if (!firstName || !lastName) { alert('Please enter your name.'); return; }
+    if (!email && !phone)         { alert('Please enter an email or phone number.'); return; }
+    if (!date)                    { alert('Please select a date.'); return; }
+    if (!selectedTime)            { alert('Please select a time slot.'); return; }
+    if (!selectedSeats)           { alert('Please select the number of seats.'); return; }
+
+    const dateFormatted = new Date(date + 'T12:00:00').toLocaleDateString('en-ZA', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+    document.getElementById('successDetail').innerHTML =
+      `<strong>${firstName} ${lastName}</strong><br>` +
+      `📅 ${dateFormatted}<br>` +
+      `🕐 ${selectedTime}<br>` +
+      `👥 ${selectedSeats} ${selectedSeats === '1' ? 'guest' : 'guests'}` +
+      (occasion  ? `<br>🎉 ${occasion}` : '') +
+      (notes     ? `<br>📝 ${notes}`    : '') +
+      `<br><br>We will confirm your reservation at <strong>${email || phone}</strong>.`;
+
+    document.getElementById('bookingFormBody').classList.add('hide');
+    document.getElementById('bookingSuccess').classList.add('show');
+  }
+
+  // ── Gallery images ───────────────────────────────────────────
+  const restaurantImgs = [
+  'bar.jpeg',
+  'food1.jpeg',
+  'food2.jpeg',
+  'interior1.jpeg',
+  'interior2.jpeg'
+];
+
+  const userGalleryEl = document.getElementById('userGallery');
+  restaurantImgs.slice(0, 4).forEach(src => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = 'Proud Mary';
+    img.style.cssText = 'width:100%;height:200px;object-fit:cover;border-radius:2px;transition:transform 0.4s';
+    img.onmouseover = () => img.style.transform = 'scale(1.02)';
+    img.onmouseout  = () => img.style.transform = 'scale(1)';
+    userGalleryEl.appendChild(img);
+  });
+
+  const galleryMain = document.getElementById('galleryMain');
+  restaurantImgs.forEach((src, i) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = 'Proud Mary';
+    img.style.cssText = 'width:100%;height:' + (i === 0 ? '280px' : '220px') + ';object-fit:cover;transition:transform 0.4s';
+    if (i === 0) img.style.gridColumn = '1 / -1';
+    img.onmouseover = () => img.style.transform = 'scale(1.02)';
+    img.onmouseout  = () => img.style.transform = 'scale(1)';
+    galleryMain.appendChild(img);
+  });
+</script>
+</body>
+</html>
